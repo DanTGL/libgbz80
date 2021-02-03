@@ -3,6 +3,8 @@
  * =========================================================
  *
  * (C) Gabriel Gambetta (gabriel.gambetta@gmail.com) 2000 - 2012
+ * Modifications Copyright (c) 2021 DanTGL
+ * 2021-02-03: Modified tstates in read8/write8 to better match the Game boy CPU
  *
  * Version 2.1.0
  *
@@ -133,7 +135,7 @@ struct Z80OpcodeTable
  */ 
 static void write8 (Z80Context* ctx, ushort addr, byte val)
 {
-	ctx->tstates += 3;
+	ctx->tstates += 4;
 	ctx->memWrite(ctx->memParam, addr, val);	
 }
 
@@ -147,7 +149,7 @@ static void write16 (Z80Context* ctx, ushort addr, ushort val)
 
 static byte read8 (Z80Context* ctx, ushort addr)
 {
-	ctx->tstates += 3;
+	ctx->tstates += 4;
 	return ctx->memRead(ctx->memParam, addr);	
 }
 
